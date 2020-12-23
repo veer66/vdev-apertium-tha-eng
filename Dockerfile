@@ -1,5 +1,4 @@
-FROM debian:jessie
-
+FROM debian:10
 
 RUN mkdir /wrk && \
     apt-get update && \
