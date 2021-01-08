@@ -23,3 +23,11 @@ RUN cd /lttoolbox && ./autogen.sh && make && make install && \
     cd /vislcg3 && ./cmake.sh && make -j3 && make install && \
     cd /apertium-tha && ./autogen.sh && make && \
     cd /apertium-tha-eng && ./autogen.sh --with-lang1=/apertium-tha && make
+
+RUN useradd -r -m -d /home/apertium -s /bin/bash -u 1000 apertium
+RUN mkdir /home/apertium/.ssh && chown apertium:apertium /home/apertium/.ssh && chmod 700 /home/apertium/.ssh
+
+RUN apt-get install -y openssh-server
+RUN mkdir /run/sshd
+
+CMD ["/usr/sbin/sshd", "-D"]
